@@ -1,0 +1,31 @@
+{
+    "columns":
+    {
+        "sample_name": "",
+        "user_name": "",
+        "file_names": "",
+        "sequencing_platform": ["Illumina", "Ion Torrent"],
+        "sequencing_type": ["single", "paired", "mate-paired", "unknown"],
+        "email_address": "",
+        "notes": "",
+        "reference" :
+        [
+            "CFSAN018746",
+            "CFSAN018747",
+            "CFSAN018748",
+            "CFSAN018749",
+            "CFSAN018750",
+            "CFSAN018751"
+        ]
+    },
+    "mandatory":
+    [
+        "sample_name",
+        "user_name",
+        "file_names",
+        "sequencing_platform",
+        "sequencing_type",
+        "email_address",
+        "reference"
+    ]
+}
