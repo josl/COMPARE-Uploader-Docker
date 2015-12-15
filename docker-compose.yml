@@ -1,0 +1,19 @@
+db:
+  image: postgres
+web:
+  build: .
+  command: python manage.py runserver 0.0.0.0:8000
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - db
+angular:
+  image: php:7.0-apache
+  ports:
+    - "8890:80"
+  links:
+    - web
+  volumes:
+    - ./frontend:/var/www/html/
