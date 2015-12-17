@@ -29,41 +29,49 @@ class SaveMeta(View):
             return Response('Authentication expired', status=404)
 
         user = User.objects.get(id=decoded['user_id'])
-        meta = Metadata(
-            user=user,
-            uid=meta_uid,
-            sequencing_platform=metadata['sequencing_platform'],
-            sequencing_type=metadata['sequencing_type'],
-            pre_assembled=metadata['pre_assembled'],
-            isolation_source=metadata['isolation_source'],
-            pathogenic=metadata['pathogenic'],
-            sample_name=metadata['sample_name'],
-            longitude=metadata['longitude'],
-            latitude=metadata['latitude'],
-            organism=metadata['organism'],
-            strain=metadata['strain'],
-            subtype=metadata['subtype'],
-            country=metadata['country'],
-            region=metadata['region'],
-            city=metadata['city'],
-            zip_code=metadata['zip_code'],
-            location_note=metadata['location_note'],
-            source_note=metadata['source_note'],
-            pathogenicity_note=metadata['pathogenicity_note'],
-            collected_by=metadata['collected_by'],
-            email_address=metadata['email_address'],
-            notes=metadata['notes'],
-            usage_restrictions=metadata['usage_restrictions'],
-            collection_date=metadata['collection_date'],
-            release_date=metadata['release_date'])
-        meta.save()
+        print 'Vamos a probar...'
+        meta = Metadata.objects.filter(uid=meta_uid)
+        if len(meta) == 0:
+            print 'PRIMERA VEZ!!!'
+            meta = Metadata(
+                user=user,
+                uid=meta_uid,
+                sequencing_platform=metadata['sequencing_platform'],
+                sequencing_type=metadata['sequencing_type'],
+                pre_assembled=metadata['pre_assembled'],
+                isolation_source=metadata['isolation_source'],
+                pathogenic=metadata['pathogenic'],
+                sample_name=metadata['sample_name'],
+                longitude=metadata['longitude'],
+                latitude=metadata['latitude'],
+                organism=metadata['organism'],
+                strain=metadata['strain'],
+                subtype=metadata['subtype'],
+                country=metadata['country'],
+                region=metadata['region'],
+                city=metadata['city'],
+                zip_code=metadata['zip_code'],
+                location_note=metadata['location_note'],
+                source_note=metadata['source_note'],
+                pathogenicity_note=metadata['pathogenicity_note'],
+                collected_by=metadata['collected_by'],
+                email_address=metadata['email_address'],
+                notes=metadata['notes'],
+                usage_restrictions=metadata['usage_restrictions'],
+                collection_date=metadata['collection_date'],
+                release_date=metadata['release_date'])
+            meta.save()
+        else:
+            print 'YA EXISTIAAAAA'
+            meta = meta[0]
+            print meta
         print meta_uid
         files = MyChunkedUpload.objects.filter(meta_uid=meta_uid)
         print files
         for file in files:
-          print meta
-          file.meta_id = meta
-          file.save()
+            print meta
+            file.meta_id = meta
+            file.save()
         return Response('Everything went accordint to plan...', status=200)
 
 

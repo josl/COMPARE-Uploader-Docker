@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import datetime
+from django.conf import settings
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -111,4 +114,20 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
+)
+
+
+# JWT SETTINGS
+JWT_EXPIRATION_DELTA = getattr(
+    settings,
+    'JWT_EXPIRATION_DELTA',
+    datetime.timedelta(days=1)
+)
+
+# JWT_ALLOW_REFRESH = getattr(settings, 'JWT_ALLOW_REFRESH', False)
+
+JWT_REFRESH_EXPIRATION_DELTA = getattr(
+    settings,
+    'JWT_REFRESH_EXPIRATION_DELTA',
+    datetime.timedelta(days=1)
 )
