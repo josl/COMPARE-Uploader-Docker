@@ -8,7 +8,7 @@ from django.core import serializers
 from chunked_upload.response import Response
 from api.models import MyChunkedUpload
 from django.http import StreamingHttpResponse, HttpResponse
-from django.core.servers.basehttp import FileWrapper
+from wsgiref.util import FileWrapper
 import json
 
 
@@ -96,7 +96,7 @@ class SendData(View):
             struct["fields"]["file_names"] = ' '.join([f.filename for f in files])
             answer.append(struct)
 
-        return Response(json.dumps(answer), mimetype='application/json')
+        return Response(json.dumps(answer))
 
 
 class SendFile(View):

@@ -1,8 +1,10 @@
 db:
   image: postgres
 web:
-  build: .
+  build: dev
   command: python manage.py runserver 0.0.0.0:8000
+  environment:
+    SITE_ENV: dev
   volumes:
     - .:/code
   ports:
@@ -10,10 +12,10 @@ web:
   links:
     - db
 angular:
-  image: php:7.0-apache
+  image: httpd:latest
   ports:
     - "8889:80"
   links:
     - web
   volumes:
-    - ./frontend:/var/www/html/
+    - ./frontend:/usr/local/apache2/htdocs/

@@ -1,0 +1,33 @@
+db:
+  image: postgres
+web:
+  build: prod
+  command: python manage.py runserver 0.0.0.0:8000
+  environment:
+    SITE_ENV: prod
+  volumes:
+    - .:/code
+  ports:
+    - "8890:8000"
+  links:
+    - db
+angular:
+  image: httpd:latest
+  ports:
+    - "8889:80"
+    - "443:443"
+  links:
+    - web
+  volumes:
+    - ./frontend:/usr/local/apache2/htdocs/
+    # Configuration fiels located in /etc/apache2/
+    - /home/cisneros/certs:/etc/ssl/private/servercerts
+    - /etc/apache2:/apache_conf
+    # then customize the /usr/local/apache2/conf/httpd.conf by removing
+    # the comment from the line with #Include conf/extra/httpd-ssl.conf.
+    # This config file will use the certificate files previously added and tell
+    # the daemon to also listen on port 443. Be sure to also add something
+    # like -p 443:443 to your docker run to forward the https port.
+    #
+    # For production use this
+    # https://httpd.apache.org/docs/2.2/ssl/ssl_faq.html

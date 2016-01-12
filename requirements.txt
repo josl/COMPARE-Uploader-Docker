@@ -1,7 +1,9 @@
 wsgiref==0.1.2
 gunicorn==19.0.0
-Django==1.6.5
+Django
 django-chunked-upload
 psycopg2
 django-cors-headers
 django-jwt-auth
+djangorestframework-jwt
+djangorestframework

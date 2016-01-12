@@ -11,6 +11,7 @@ import json
 from api.models import MyChunkedUpload
 from meta.models import Metadata
 from django.http import HttpResponse
+from token_auth.views import Refresh
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
 from uploader.settings import SECRET_KEY
@@ -96,6 +97,23 @@ class SaveView(ChunkedUploadView):
         # print "OPTIONS CHUNKS..."
         return Response({'size': 0}, status=200)
 
+    def get_response_data(self, chunked_upload, request):
+        """
+        Data for the response. Should return a dictionary-like object.
+        """
+        token = request.POST.get('token')
+        refresh = Refresh()
+        new_payload = refresh.refresh(token)
+        print new_payload
+        # Refresh token
+        return {
+            'upload_id': chunked_upload.upload_id,
+            'offset': chunked_upload.offset,
+            'expires': chunked_upload.expires_on,
+            'token': new_payload['token'],
+            'user': new_payload['user']
+        }
+
     def post(self, request, *args, **kwargs):
         """
         Handle POST requests.
@@ -105,6 +123,7 @@ class SaveView(ChunkedUploadView):
             token = request.POST.get('token')
             try:
                 print jwt.decode(token, SECRET_KEY)
+                print request.POST
                 print "Everything fine..."
             except:
                 return Response('Authentication expired', status=401)

@@ -1,7 +1,5 @@
 uploader_angular
-dist
 chunked_uploads
 frontenddev
-frontend_old
 static
-secret_key.txt
+frontend_old

@@ -1,46 +1,73 @@
-django-chunked-upload demo
+COMPARE/ENGAGE uploader in a Docker container
 ==========================
 
-This is a Django demo project of the `django-chunked-upload <https://github.com/juliomalegria/django-chunked-upload>`__ module.
+This project documents theCOMPARE/ENGAGE uploader running in a Docker container
 
-Live demo
----------
+Installation
+=============
 
-To see a live demo of the project go to: `django-chunked-upload.juliomalegria.com <http://django-chunked-upload.juliomalegria.com>`__.
+If in another platform that is not Linux, like MacOS X or Window, boot2docker should be installed.
 
-Try it locally
---------------
+Recommended installer can be found [here](http://boot2docker.io) which install Docker and the VM.
 
-1. Clone the repo.
+For the specific OS:
+- [Mac](https://github.com/boot2docker/osx-installer/releases)
+- [Windows](https://github.com/boot2docker/windows-installer/releases)
 
-::
+Alternatively, on Mac there is also the possibility to install it through HomeBrew
 
-    git clone git@github.com:juliomalegria/django-chunked-upload-demo.git
-    cd django-chunked-upload-demo/
+```bash
+brew install boot2docker
+brew install docker-compose
+```
 
-2. Install the requirements (I suggest using a virtualenv).
+To start running the VM and the Docker daemon:
 
-::
+```bash
+boot2docker init
+boot2docker start
+# To test that everything worked
+boot2docker status
+docker version
+docker run hello-worldw
+```
 
-    virtualenv ven
-    source venv/bin/activate
-    pip install -r requirements.txt
+Usage
+=============
 
-3. Create the tables.
+```bash
+docker-compose build
+docker-compose up -d
+```
+```bash
+# Run terminal shell on selected image
+docker exec -t -i <imageid> /bin/bash
+```
+```bash
+# Remove all containers
+docker rm $(docker ps -a -q)
+```
+```bash
+# Remove all images
+docker rmi $(docker images -a -q)
+```
 
-::
+Documentation
+=============
 
-    ./manage.py syncdb --noinput
 
-4. Run the server.
 
-::
+License
+=======
 
-    ./manage.py runserver
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-5. Go to `127.0.0.1:8000 <http://127.0.0.1:8000>`__ and upload a file.
+   http://www.apache.org/licenses/LICENSE-2.0
 
-Support
--------
-
-If you find any bug or you want to propose a new feature, please use the `issues tracker <https://github.com/juliomalegria/django-chunked-upload/issues>`__. I'll be happy to help you! :-)
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

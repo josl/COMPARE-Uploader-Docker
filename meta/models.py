@@ -19,8 +19,8 @@ class Metadata(models.Model):
         abstract = False
 
     PLATFORM = (
-        ('Illumina', 'Illumina'),
-        ('Ion Torrent', 'Ion Torrent'),
+        ('illumina', 'illumina'),
+        ('ion torrent', 'ion torrent'),
     )
     SEQ_TYPE = (
         ('single', 'single'),
@@ -32,7 +32,7 @@ class Metadata(models.Model):
         ('yes', 'yes'),
         ('no', 'no'),
     )
-    SOURCE = (
+    HOST = (
         ('human', 'human'),
         ('water', 'water'),
         ('food', 'food'),
@@ -62,9 +62,10 @@ class Metadata(models.Model):
     sequencing_platform = models.CharField(max_length=255, choices=PLATFORM)
     sequencing_type = models.CharField(max_length=255, choices=SEQ_TYPE)
     pre_assembled = models.CharField(max_length=255, choices=PRE_ASSEMBLED)
-    isolation_source = models.CharField(max_length=255, choices=SOURCE)
-
+    host = models.CharField(max_length=255, choices=HOST)
     pathogenic = models.CharField(max_length=255, choices=PATHO, null=True)
+    isolation_source = models.CharField(max_length=255)
+    
     created_on = models.DateTimeField(auto_now_add=True)
     sample_name = models.CharField(max_length=255, null=True)
     longitude = models.CharField(max_length=255, null=True)
