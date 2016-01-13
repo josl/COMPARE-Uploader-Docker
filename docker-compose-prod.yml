@@ -15,7 +15,6 @@ angular:
   image: httpd:latest
   ports:
     - "8889:80"
-    - "443:443"
   links:
     - web
   volumes:
