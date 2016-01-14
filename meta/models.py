@@ -85,7 +85,6 @@ class Metadata(models.Model):
     collected_by = models.CharField(max_length=255, null=True)
     email_address = models.EmailField(max_length=255, null=True)
     notes = models.TextField(max_length=255, null=True)
-    usage_restrictions = models.CharField(max_length=255, choices=RESTRICTION,
-                                          null=True)
+
     collection_date = models.CharField(max_length=255)
     release_date = models.EmailField(max_length=255, null=True)
