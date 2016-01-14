@@ -4,5 +4,7 @@ chunked_uploads
 frontenddev
 frontend_old
 frontendEngage
+frontend
 static
 secret_key.txt
+*.pyc

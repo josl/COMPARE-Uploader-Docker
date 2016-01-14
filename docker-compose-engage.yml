@@ -22,7 +22,7 @@ angular:
     # - /home/cisneros/certs/STAR_cbs_dtu_dk.crt:/usr/local/apache2/conf/
     # - /home/cisneros/certs/STAR_cbs_dtu_dk-private.key:/usr/local/apache2/conf/
     # - /home/cisneros/certs/STAR_cbs_dtu_dk-private.nopass.key:/usr/local/apache2/conf/
-    - ./frontend:/usr/local/apache2/htdocs/
+    - ./frontend_engage:/usr/local/apache2/htdocs/
     # Configuration fiels located in /etc/apache2/
     # - /home/cisneros/certs:/etc/ssl/private/servercerts
     - /etc/apache2:/apache_conf

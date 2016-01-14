@@ -1,0 +1,43 @@
+{
+    "columns":
+    {
+        "sample_name": "",
+        "accession_id": "",
+        "user_name": "",
+        "file_names": "",
+        "sequencing_platform": ["illumina", "ion torrent"],
+        "sequencing_type": ["single", "paired", "mate-paired", "unknown"],
+        "pre_assembled": ["yes", "no"],
+        "organism": "",
+        "strain": "",
+        "subtype": "",
+        "country": "",
+        "region": "",
+        "city": "",
+        "zip_code": "",
+        "longitude": "",
+        "latitude": "",
+        "location_note": "",
+        "host": ["human", "water", "food", "animal", "other", "laboratory"],
+        "isolation_source": "",
+        "source_note": "",
+        "pathogenic": ["yes", "no", "unknown"],
+        "pathogenicity_note": "",
+        "collection_date": "",
+        "collected_by": "",
+        "release_date": "",
+        "email_address": "",
+        "notes": ""
+    },
+    "mandatory":
+    [
+        "sequencing_platform",
+        "sequencing_type",
+        "file_names",
+        "pre_assembled",
+        "country",
+        "host",
+        "isolation_source",
+        "collection_date"
+    ]
+}
