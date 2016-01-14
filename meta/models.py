@@ -65,7 +65,7 @@ class Metadata(models.Model):
     host = models.CharField(max_length=255, choices=HOST)
     pathogenic = models.CharField(max_length=255, choices=PATHO, null=True)
     isolation_source = models.CharField(max_length=255)
-    
+
     created_on = models.DateTimeField(auto_now_add=True)
     sample_name = models.CharField(max_length=255, null=True)
     longitude = models.CharField(max_length=255, null=True)

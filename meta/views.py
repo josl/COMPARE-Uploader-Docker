@@ -57,7 +57,6 @@ class SaveMeta(View):
                 collected_by=metadata['collected_by'],
                 email_address=metadata['email_address'],
                 notes=metadata['notes'],
-                usage_restrictions=metadata['usage_restrictions'],
                 collection_date=metadata['collection_date'],
                 release_date=metadata['release_date'])
             meta.save()

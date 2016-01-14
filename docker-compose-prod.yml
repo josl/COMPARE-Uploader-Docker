@@ -18,9 +18,13 @@ angular:
   links:
     - web
   volumes:
+    # - /home/cisneros/certs/STAR_cbs_dtu_dk.ca-bundle:/usr/local/apache2/conf/
+    # - /home/cisneros/certs/STAR_cbs_dtu_dk.crt:/usr/local/apache2/conf/
+    # - /home/cisneros/certs/STAR_cbs_dtu_dk-private.key:/usr/local/apache2/conf/
+    # - /home/cisneros/certs/STAR_cbs_dtu_dk-private.nopass.key:/usr/local/apache2/conf/
     - ./frontend:/usr/local/apache2/htdocs/
     # Configuration fiels located in /etc/apache2/
-    - /home/cisneros/certs:/etc/ssl/private/servercerts
+    # - /home/cisneros/certs:/etc/ssl/private/servercerts
     - /etc/apache2:/apache_conf
     # then customize the /usr/local/apache2/conf/httpd.conf by removing
     # the comment from the line with #Include conf/extra/httpd-ssl.conf.

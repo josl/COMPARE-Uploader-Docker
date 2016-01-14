@@ -25,13 +25,39 @@ ALLOWED_HOSTS = [
   'compare.cbs.dtu.dk'
 ]
 
+CORS_ORIGIN_WHITELIST = (
+    'compare.cbs.dtu.dk',
+    'compare.cbs.dtu.dk/compareAPI',
+    'compare.cbs.dtu.dk/compareAPI/',
+    'compare.cbs.dtu.dk/portal',
+    'compare.cbs.dtu.dk/portal/',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware'
 )
+
+APPEND_SLASH = False
+
+CORS_ALLOW_HEADERS = (
+        'x-requested-with',
+        'content-type',
+        'accept',
+        'origin',
+        'authorization',
+        'x-csrftoken',
+        'Content-Range',
+        'HTTP_CONTENT_RANGE',
+        'CONTENT_RANGE',
+        'X-Forwarded-Host',
+        'X-Forwarded-Port',
+        'X-Forwarded-For',
+        'X-Forwarded-Scheme'
+    )
