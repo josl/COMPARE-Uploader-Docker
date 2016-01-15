@@ -5,6 +5,8 @@ frontenddev
 frontend_old
 frontendEngage
 frontend
+frontend_engage_old
+frontend_compare_old
 static
 secret_key.txt
 *.pyc
