@@ -156,10 +156,65 @@ class MyChunkedUploadCompleteView(ChunkedUploadCompleteView):
         chunked_upload.meta_uid = meta_uid
         chunked_upload.save()
 
+        #  Save Metadata
+        metadata = json.loads(request.POST.get('meta'))
+        meta_uid = metadata['meta_uid']
+        token = request.POST.get('token')
+        upload_id = request.POST.get('upload_id')
+        try:
+            decoded = jwt.decode(token, SECRET_KEY)
+        except:
+            return Response('Authentication expired', status=404)
+
+        user = User.objects.get(id=decoded['user_id'])
+        print 'Vamos a probar...'
+        meta = Metadata.objects.filter(uid=meta_uid)
+        if len(meta) == 0:
+            print 'There is no record of metatada in DB'
+            meta = Metadata(
+                user=user,
+                uid=meta_uid,
+                sequencing_platform=metadata['sequencing_platform'],
+                sequencing_type=metadata['sequencing_type'],
+                pre_assembled=metadata['pre_assembled'],
+                isolation_source=metadata['isolation_source'],
+                pathogenic=metadata['pathogenic'],
+                sample_name=metadata['sample_name'],
+                longitude=metadata['longitude'],
+                latitude=metadata['latitude'],
+                organism=metadata['organism'],
+                strain=metadata['strain'],
+                subtype=metadata['subtype'],
+                country=metadata['country'],
+                region=metadata['region'],
+                city=metadata['city'],
+                zip_code=metadata['zip_code'],
+                location_note=metadata['location_note'],
+                source_note=metadata['source_note'],
+                pathogenicity_note=metadata['pathogenicity_note'],
+                collected_by=metadata['collected_by'],
+                email_address=metadata['email_address'],
+                notes=metadata['notes'],
+                collection_date=metadata['collection_date'],
+                release_date=metadata['release_date'])
+            try:
+                meta.save()
+            except:
+                print 'There seems to be a race condition here................'
+                meta = Metadata.objects.filter(uid=meta_uid)
+                meta = meta[0]
+        else:
+            print 'Uploading the second file...'
+            meta = meta[0]
+        files = MyChunkedUpload.objects.filter(meta_uid=meta_uid)
+        for file in files:
+            file.meta_id = meta
+            file.save()
+
     def get_response_data(self, chunked_upload, request):
         upload_id = request.POST.get('upload_id')
         uploaded = get_object_or_404(self.get_queryset(request),
-                                           upload_id=upload_id)
+                                     upload_id=upload_id)
         print uploaded
         print uploaded.meta_id
         return {'message': ("You successfully uploaded '%s' (%s bytes)!" %
