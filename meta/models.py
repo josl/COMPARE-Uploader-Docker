@@ -88,3 +88,7 @@ class Metadata(models.Model):
 
     collection_date = models.CharField(max_length=255)
     release_date = models.EmailField(max_length=255, null=True)
+
+    def __unicode__(self):
+        return u'<%s - user: %s>' % (
+            self.sample_name, self.user)
