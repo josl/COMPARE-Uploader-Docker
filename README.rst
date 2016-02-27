@@ -54,8 +54,14 @@ docker rmi $(docker images -a -q)
 
 Documentation
 =============
+docker-compose -f docker-compose-UPLOADER.yml up -d
+docker exec -t -i UPLOADERuploader_web_1 /bin/bash
 
-
+# Once inside the container:
+python manage.py migrate
+python manage.py createsuperuser
+mkdir template
+python manage.py collectstatic
 
 License
 =======
