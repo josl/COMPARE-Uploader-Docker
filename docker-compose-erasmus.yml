@@ -8,13 +8,13 @@ web:
   volumes:
     - .:/code
   ports:
-    - "8892:8000"
+    - "8895:8000"
   links:
     - db
 angular:
   image: httpd:latest
   ports:
-    - "8891:80"
+    - "8894:80"
   links:
     - web
   volumes:
