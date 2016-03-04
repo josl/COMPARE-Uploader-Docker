@@ -2,4 +2,9 @@ uploader_angular
 chunked_uploads
 frontenddev
 static
-frontend_old
+frontend_compare_old
+frontend_cengage_old
+frontend
+env
+data.db
+data10.db

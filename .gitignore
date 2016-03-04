@@ -11,3 +11,6 @@ frontend_erasmus_old
 static
 secret_key.txt
 *.pyc
+env
+data.db
+data10.db

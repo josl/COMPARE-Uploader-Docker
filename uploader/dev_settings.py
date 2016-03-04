@@ -28,6 +28,17 @@ MIDDLEWARE_CLASSES = (
 
 DEBUG = True
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'data.db'),
+        # for sqlite write lock timeout
+        'OPTIONS': {
+            'timeout': 120,
+        }
+    }
+}
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [
